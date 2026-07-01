@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="VivaPay — Seu cartão de super benefícios." />
+    <meta name="theme-color" content="#dc2626" />
+    <title>VivaPay | Seu cartão de super benefícios</title>
+    <script>
+      (function () {
+        var port = parseInt(location.port, 10) || 80;
+        var isFile = location.protocol === 'file:';
+        var isLiveServer = !isFile && port >= 5500 && port <= 5599;
+
+        if (isFile) {
+          window.__VIVAPAY_STOP__ = true;
+          return;
+        }
+
+        if (isLiveServer) {
+          window.__VIVAPAY_LIVE_CHECK__ = fetch('./dist/index.html', { method: 'HEAD' })
+            .then(function (r) { return r.ok; })
+            .catch(function () { return false; });
+        }
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div id="root">
+      <p style="font-family:system-ui,sans-serif;text-align:center;padding:3rem 1.5rem;color:#64748b;">
+        Carregando VivaPay…
+      </p>
+    </div>
+    <noscript>
+      <p style="font-family:system-ui,sans-serif;text-align:center;padding:2rem;">
+        Este site precisa de JavaScript habilitado.
+      </p>
+    </noscript>
+    <script>
+      if (window.__VIVAPAY_STOP__ && location.protocol === 'file:') {
+        document.body.innerHTML =
+          '<div style="font-family:system-ui,sans-serif;max-width:520px;margin:4rem auto;padding:2rem;line-height:1.7;color:#0f172a">' +
+          '<h1 style="color:#dc2626">VivaPay</h1>' +
+          '<p><strong>Não abra o index.html diretamente.</strong></p>' +
+          '<p>Use <code style="background:#f1f5f9;padding:2px 8px;border-radius:6px">live-server.bat</code> ou <code style="background:#f1f5f9;padding:2px 8px;border-radius:6px">start.bat</code></p>' +
+          '</div>';
+      }
+    </script>
+    <!-- Entrada obrigatória do Vite — não remover -->
+    <script type="module" src="/src/main.jsx" id="vivapay-entry"></script>
+    <script>
+      (function () {
+        var entry = document.getElementById('vivapay-entry');
+        if (!entry) return;
+
+        if (window.__VIVAPAY_STOP__) {
+          entry.remove();
+          return;
+        }
+
+        if (window.__VIVAPAY_LIVE_CHECK__) {
+          entry.remove();
+          window.__VIVAPAY_LIVE_CHECK__.then(function (hasDist) {
+            if (hasDist) location.replace('./dist/index.html');
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
