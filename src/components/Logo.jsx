@@ -3,15 +3,19 @@ export default function Logo({ className = '', light = false }) {
     <div className={`logo ${className}`}>
       <svg className="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <rect width="40" height="40" rx="10" fill="url(#logoGrad)" />
-        <path
-          d="M10 25 L15 15 L20 22 L25 12 L30 25"
-          stroke="#fff"
-          strokeWidth="2.5"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        />
-        <circle cx="30" cy="10" r="4" fill="#facc15" />
-        <rect x="8" y="28" width="24" height="3" rx="1.5" fill="rgba(255,255,255,0.3)" />
+        <text
+          x="20"
+          y="27"
+          textAnchor="middle"
+          fill="#fff"
+          fontFamily="'Outfit', 'DM Sans', sans-serif"
+          fontSize="17"
+          fontWeight="800"
+          letterSpacing="0.5"
+        >
+          VP
+        </text>
+        <circle cx="32" cy="8" r="4" fill="#facc15" />
         <defs>
           <linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40">
             <stop stopColor="#facc15" />
